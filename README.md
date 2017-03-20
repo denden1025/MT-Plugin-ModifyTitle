@@ -1,4 +1,4 @@
-﻿# MT Plugin ModifyTitle Readme
+# MT Plugin ModifyTitle Readme
 ### update：2017/3/20
 ---
 ## 概要（Overview）
