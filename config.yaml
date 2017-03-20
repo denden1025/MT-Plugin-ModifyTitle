@@ -1,0 +1,22 @@
+id: ModifyTitle
+key: ModifyTitle
+name: ModifyTitle
+version: 1.0
+description: <__trans phrase="_PLUGIN_DESCRIPTION">
+author_name: <__trans phrase="_PLUGIN_AUTHOR">
+author_link: http://www.webkoza.com/
+l10n_class: ModifyTitle::L10N
+
+callbacks:
+  MT::App::CMS::cms_pre_save.entry:
+    code: $ModifyTitle::ModifyTitle::_handler
+    priority: 5
+
+blog_config_template: modt_setting_blog.tmpl
+settings:
+    Enable:
+       default: 1
+       scope: blog
+    CatID:
+       default: 1
+       scope: blog
