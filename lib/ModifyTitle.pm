@@ -6,14 +6,20 @@ package ModifyTitle;
 #-----------------------------------------------
 sub _handler{
 my($cb,$app,$obj,$orig_obj) = @_;
+my($dda);
 #my $IDFILE = '/home/httpd/html/mt/plugins/ModifyTitle/lib/debug.txt';
 #open IDF,">$IDFILE" or die "Cannot Open $IDFILE :$!";
 my $blog_id = 'blog:' . $obj->blog_id;
 my $plugin = MT->component('ModifyTitle');
 my $Enable = $plugin->get_config_value('Enable', $blog_id);
 if((defined($Enable)) and ($Enable == 1)){
-	my $dda = &get_local_time('exp2');
-	if($obj->title =~ /2[0-9][0-9][0-9]\-([1-9]|1[0-2])\-([1-9]|1[0-9]|2[0-9]|3[0-1])/){
+	if(defined($obj->created_on) and ($obj->created_on ne '')){ #更新
+		#$dda = [split(/\s/,$obj->created_on)]->[0]; #TIMESTAMP型で無いのね。。
+		$dda = substr($obj->created_on,0,4) . '-' . substr($obj->created_on,4,2) . '-' . substr($obj->created_on,6,2);
+	}else{ #新規
+		$dda = &get_local_time('exp2');
+	}
+	if($obj->title =~ /2[0-9][0-9][0-9]\-([1-9]|[0-1][0-2])\-([1-9]|1[0-9]|2[0-9]|3[0-1])/){
 	}else{
 		my $CatID = $plugin->get_config_value('CatID', $blog_id);
 #		print IDF "1 $Enable $CatID\n";
